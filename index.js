@@ -329,19 +329,6 @@ module.exports = {
     return utils.unique(locales);
   },
 
-  mergeTranslationTrees(projectTranslations, addonTranslations) {
-    let trees = [];
-    trees.push(projectTranslations);
-
-    if (addonTranslations && addonTranslations.length) {
-      trees = trees.concat(addonTranslations);
-    }
-
-    return funnel(mergeTrees(trees), {
-      include: ['**/*.yaml', '**/*.yml', '**/*.json']
-    });
-  },
-
   processTranslationTree(node, opts = {}) {
     let addon = this;
 
