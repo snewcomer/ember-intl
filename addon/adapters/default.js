@@ -7,7 +7,7 @@ import EmberObject, { set, computed } from '@ember/object';
 import { getOwner } from '@ember/application';
 import Translation from '../models/translation';
 
-const DefaultTranslationAdapter = EmberObject.extend({
+export default EmberObject.extend({
   _cache: null,
 
   /** @private **/
@@ -95,14 +95,7 @@ const DefaultTranslationAdapter = EmberObject.extend({
   },
 
   /** @private **/
-  translationsFor(localeName) {
-    return this.localeFactory(localeName);
-  },
-
-  /** @private **/
   findTranslationByKey(localeNames, translationKey) {
     return this.lookup(localeNames, translationKey);
   }
 });
-
-export default DefaultTranslationAdapter;
