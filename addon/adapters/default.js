@@ -3,34 +3,41 @@
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 
-import EmberObject, { get, computed } from '@ember/object';
-import { A as emberArray } from '@ember/array';
+import EmberObject, { set, computed } from '@ember/object';
 import { getOwner } from '@ember/application';
 import Translation from '../models/translation';
 
 const DefaultTranslationAdapter = EmberObject.extend({
-  _seen: null,
+  _cache: null,
 
   /** @private **/
-  locales: computed('_seen.[]', function() {
-    return get(this, '_seen').map(l => l.localeName);
-  }).readOnly(),
+  locales: computed(() => []),
 
   /** @private **/
   init() {
     this._super();
-    this._seen = emberArray();
+    this._cache = new Map();
   },
 
   /** @private **/
-  lookupLocale(localeName) {
-    return this._seen.findBy('localeName', localeName);
+  findModel(localeName) {
+    let model = this._cache.get(localeName);
+
+    if (!model) {
+      model = getOwner(this).lookup(`translation:${localeName}`);
+
+      if (model) {
+        this.register(localeName, model);
+      }
+    }
+
+    return model;
   },
 
   /** @private **/
   localeFactory(localeName) {
-    const owner = getOwner(this);
-    const lookupName = `ember-intl@translation:${localeName}`;
+    let owner = getOwner(this);
+    let lookupName = `translation:${localeName}`;
     let model = owner.lookup(lookupName);
 
     if (model) {
@@ -53,14 +60,24 @@ const DefaultTranslationAdapter = EmberObject.extend({
 
     owner.register(lookupName, ModelKlass);
     model = owner.lookup(lookupName);
-    this._seen.pushObject(model);
+    this.register(localeName, model);
 
     return model;
   },
 
   /** @private **/
+  register(localeName, model) {
+    if (this._cache.has(localeName)) {
+      return;
+    }
+
+    this._cache.set(localeName, model);
+    set(this, 'locales', [...this._cache.keys()]);
+  },
+
+  /** @private **/
   has(localeName, translationKey) {
-    const model = this.lookupLocale(localeName);
+    const model = this.findModel(localeName);
 
     return model && model.has(translationKey);
   },
@@ -69,7 +86,7 @@ const DefaultTranslationAdapter = EmberObject.extend({
   lookup(localeNames, translationKey) {
     for (let i = 0; i < localeNames.length; i++) {
       const localeName = localeNames[i];
-      const model = this.lookupLocale(localeName);
+      const model = this.findModel(localeName);
 
       if (model && model.has(translationKey)) {
         return model.getValue(translationKey);

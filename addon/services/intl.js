@@ -131,7 +131,6 @@ const IntlService = Service.extend(Evented, {
   _hydrate() {
     const config = this._owner.resolveRegistration('config:environment');
     const cldrs = this._lookupByFactoryType('cldrs', config.modulePrefix);
-    const translations = this._lookupByFactoryType('translations', config.modulePrefix);
 
     if (!cldrs.length) {
       warn(
@@ -149,12 +148,6 @@ const IntlService = Service.extend(Evented, {
         return this._owner.resolveRegistration(`cldr:${moduleName.split('/').pop()}`);
       })
       .forEach(data => data.forEach(this.addLocaleData));
-
-    translations.forEach(moduleName => {
-      const localeName = moduleName.split('/').pop();
-
-      this.addTranslations(localeName, this._owner.resolveRegistration(`translation:${localeName}`));
-    });
   },
 
   /** @private **/
@@ -219,16 +212,6 @@ const IntlService = Service.extend(Evented, {
     return localeNames.some(localeName => {
       return adapter.has(localeName, key);
     });
-  },
-
-  /** @public **/
-  getLocalesByTranslations() {
-    deprecate('[ember-intl] `getLocalesByTranslations` is deprecated, use `locales` computed property', false, {
-      id: 'ember-intl-locales-cp',
-      until: '3.0.0'
-    });
-
-    return get(this, 'locales');
   },
 
   /**

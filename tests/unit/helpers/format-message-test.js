@@ -142,15 +142,6 @@ module('format-message', function(hooks) {
     assert.equal(this.element.textContent.trim(), 'Allison harvested 10 apples.Jeremy harvested 60 apples.');
   });
 
-  test('able to discover all register translations', function(assert) {
-    assert.expect(2);
-    this.intl.addTranslation('es_MX', 'foo', 'bar');
-    /* tests that the locale name becomes normalized to es-mx */
-    this.intl.exists('test', 'fr-ca');
-    assert.equal(this.intl.getLocalesByTranslations().join('; '), 'en-us; es-es; fr-fr; es-mx');
-    assert.equal(get(this.intl, 'locales').join('; '), 'en-us; es-es; fr-fr; es-mx');
-  });
-
   test('should respect format options for date ICU block', async function(assert) {
     assert.expect(1);
     this.day = 1390518044403;
@@ -168,7 +159,7 @@ module('format-message', function(hooks) {
   test('intl-get returns message for key that is a literal string (not an object path)', async function(assert) {
     assert.expect(1);
 
-    const translation = this.owner.lookup('ember-intl@translation:en-us');
+    const translation = this.owner.lookup('translation:en-us');
     const fn = translation.getValue;
 
     translation.getValue = function getValue(key) {

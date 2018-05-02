@@ -1,3 +1,4 @@
+import { get } from '@ember/object';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { isHTMLSafe } from '@ember/string';
@@ -8,9 +9,16 @@ const DEFAULT_LOCALE_NAME = 'en';
 
 module('service:intl', function(hooks) {
   setupTest(hooks);
+
   hooks.beforeEach(function() {
     this.intl = this.owner.lookup('service:intl');
     this.intl.setLocale(DEFAULT_LOCALE_NAME);
+  });
+
+  test('should return all seen locales', function(assert) {
+    assert.expect(1);
+    this.intl.addTranslation('es_MX', 'foo', 'bar');
+    assert.equal(get(this.intl, 'locales').join('; '), 'es-mx');
   });
 
   test('can access formatMessage without a locale set', function(assert) {

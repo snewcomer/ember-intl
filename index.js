@@ -90,7 +90,13 @@ module.exports = {
             return `${key}.js`;
           },
           wrapEntry(obj) {
-            return `export default ${stringify(obj)};`;
+            return `
+import Translation from '../models/ember-intl-translation';
+
+export default Translation.extend({
+  translations: ${stringify(obj)}
+});
+`;
           }
         })
       );
