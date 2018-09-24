@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "broccoli-caching-writer": "^3.0.3",
-    "broccoli-cldr-data": "^1.1.2",
+    "broccoli-cldr-data": "git+ssh://git@github.com:ember-intl/broccoli-cldr-data.git",
     "broccoli-funnel": "^2.0.1",
     "broccoli-merge-trees": "^3.0.1",
     "broccoli-source": "^1.1.0",

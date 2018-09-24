@@ -121,13 +121,13 @@
     ember-cli-babel "^6.6.0"
     ember-compatibility-helpers "^1.0.0"
 
-"@ember-intl/formatjs-extract-cldr-data@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@ember-intl/formatjs-extract-cldr-data/-/formatjs-extract-cldr-data-3.1.0.tgz#04eefd54240d6c08f8d9ded4f70405d2cf6f9f47"
+"@ember-intl/formatjs-extract-cldr-data@snewcomer/formatjs-extract-cldr-data#sn/number-fields":
+  version "5.0.0"
+  resolved "https://codeload.github.com/snewcomer/formatjs-extract-cldr-data/tar.gz/71a578b311f97afc65c55f248396928445c384e8"
   dependencies:
-    cldr-core "^29.0.0"
-    cldr-dates-full "^29.0.0"
-    cldr-numbers-full "^29.0.0"
+    cldr-core "^33.0.0"
+    cldr-dates-full "^33.0.0"
+    cldr-numbers-full "^33.0.0"
     glob "^5.0.1"
     make-plural "^2.1.3"
     uglify-js "^2.6.2"
@@ -1452,11 +1452,11 @@ broccoli-caching-writer@^3.0.3:
     rsvp "^3.0.17"
     walk-sync "^0.3.0"
 
-broccoli-cldr-data@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/broccoli-cldr-data/-/broccoli-cldr-data-1.1.2.tgz#ff5604604ff37eef5d634c2eb52a554b896e3ed1"
+"broccoli-cldr-data@git+ssh://git@github.com:ember-intl/broccoli-cldr-data.git":
+  version "1.1.1"
+  resolved "git+ssh://git@github.com:ember-intl/broccoli-cldr-data.git#f965a8ca53dc5b9642aec5eb003a3b1974b8ce95"
   dependencies:
-    "@ember-intl/formatjs-extract-cldr-data" "^3.1.0"
+    "@ember-intl/formatjs-extract-cldr-data" snewcomer/formatjs-extract-cldr-data#sn/number-fields
     broccoli-caching-writer "^3.0.3"
     mkdirp "^0.5.1"
     serialize-javascript "^1.3.0"
@@ -2087,17 +2087,17 @@ cldr-core@28.0.0:
   version "28.0.0"
   resolved "https://registry.yarnpkg.com/cldr-core/-/cldr-core-28.0.0.tgz#46db6208292da7fe9f03b7b79f8ca90ceb84c6ad"
 
-cldr-core@^29.0.0:
-  version "29.0.0"
-  resolved "https://registry.yarnpkg.com/cldr-core/-/cldr-core-29.0.0.tgz#fe983898c52b6bebcd1558c03063e9e9eb3c9cdd"
+cldr-core@^33.0.0:
+  version "33.0.0"
+  resolved "https://registry.yarnpkg.com/cldr-core/-/cldr-core-33.0.0.tgz#200f32e7c09dd7adbe16b0cf6ee8f75e2ca4b194"
 
-cldr-dates-full@^29.0.0:
-  version "29.0.0"
-  resolved "https://registry.yarnpkg.com/cldr-dates-full/-/cldr-dates-full-29.0.0.tgz#6350acf88998bf0f9d80535ba7f8a80669f6bb08"
+cldr-dates-full@^33.0.0:
+  version "33.0.0"
+  resolved "https://registry.yarnpkg.com/cldr-dates-full/-/cldr-dates-full-33.0.0.tgz#c1746e447c75096499e06988bf66205dad20aa8e"
 
-cldr-numbers-full@^29.0.0:
-  version "29.0.0"
-  resolved "https://registry.yarnpkg.com/cldr-numbers-full/-/cldr-numbers-full-29.0.0.tgz#798b080f6248d672a8850764be9295a49a97fac6"
+cldr-numbers-full@^33.0.0:
+  version "33.0.0"
+  resolved "https://registry.yarnpkg.com/cldr-numbers-full/-/cldr-numbers-full-33.0.0.tgz#6dc62f4e5646169e5607b076035ecb2501a22e3f"
 
 clean-base-url@^1.0.0:
   version "1.0.0"
